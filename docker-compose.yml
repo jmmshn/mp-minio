@@ -3,6 +3,8 @@ services:
   app:
     image: registry.spin.nersc.gov/perssongroup/mp-minio-app:latest
     user: 60141:60141
+    ports:
+      - 60013:9000
     cap_drop:
       - ALL
     command:
@@ -10,15 +12,15 @@ services:
     environment:
       - MINIO_ACCESS_KEY=minio
       - MINIO_SECRET_KEY=miniosecret
+    volumes:
+      - /global/project/projectdirs/matgen/spin-stacks/mp-minio-dev/data:/data
   web:
     image: registry.spin.nersc.gov/perssongroup/mp-minio-web:latest
     user: 60141:60141
-    ports:
-      - "60012:9000"
-    expose:
-      - "60012"
     volumes:
-      - /global/project/projectdirs/matgen/spin-stacks/mp-minio-dev/data:/data
+      - /global/project/projectdirs/matgen/spin-stacks/mp-minio-dev/web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    group_add:
+    - nginx
     cap_drop:
-      - ALL
+    - ALL
 
