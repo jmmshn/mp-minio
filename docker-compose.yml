@@ -1,10 +1,17 @@
 version: '2'
 services:
   app:
-    image: mp-minio-app
-  web:
-    image: mp-minio-web
+    image: registry.spin.nersc.gov/perssongroup/mp-minio-app
     ports:
-    - "80:8080"
+      - "9000:9000"
+    expose:
+      - "9000"
+  web:
+    image: registry.spin.nersc.gov/perssongroup/mp-minio-web
+    ports:
+      - "60012:9000"
+    expose:
+      - "60012"
     volumes:
-    - ./web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+
