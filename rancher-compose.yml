@@ -1,7 +1,6 @@
 version: '2'
 services:
   app:
-    scale: 1
     health_check:
       # Which port to perform the check against
       port: 9000
@@ -20,7 +19,6 @@ services:
       # Response timeout is measured in milliseconds
       response_timeout: 2000
   web:
-    scale: 1
     health_check:
       # Which port to perform the check against
       port: 8080
