@@ -24,4 +24,6 @@ services:
     - nginx
     cap_drop:
     - ALL
+    labels:
+      io.rancher.container.pull_image: always
 
